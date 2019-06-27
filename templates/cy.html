@@ -1,0 +1,37 @@
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+    <meta charset="UTF-8">
+    <title>Test MySQL with Flask App</title>
+
+	<h1>This is Cy's plot!!</h1>
+
+
+    {% if result %}
+    <table id="test_tbl" style="width:100%"><tbody><tr>
+            <th>Responsent</th>
+            <th>Main branch</th>
+            <th>Hobbyist</th>
+        </tr><tr>
+         {% for row in result %}
+            <td> {{ row.Respondent }}</td>
+            <td> {{ row.MainBranch }}</td>
+            <td> {{ row.Hobbyist }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+    </table>
+    {% endif %}

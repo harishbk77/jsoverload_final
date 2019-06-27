@@ -27,3 +27,12 @@ def employees():
         return emps
     res = db_query()
     return render_template('employees.html', result=res, content_type='application/json')
+	
+@app.route('/cy')
+def cy():
+    def db_query():
+        db = Database()
+        emps = db.list_employees()
+        return emps
+    res = db_query()
+    return render_template('cy.html', result=res, content_type='application/json')
