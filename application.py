@@ -21,16 +21,6 @@ class Database:
         result = self.cur.fetchall()
         # print(result[0])
         return result
-    #     # rows = self.cur.fetchall()
-    #     # country_data = []
-    #     # for row in rows:
-    #     #     tempDict = {}
-    #     #     tempDict["country"] = row[0]
-    #     #     tempDict["respondentCount"] = int(row[1])
-    #     #     # tempDict[row[0]] = int(row[1])
-    #     #     country_data.append(tempDict)
-    #     # return country_data
-
 		
 @app.route('/')
 def index():
@@ -58,21 +48,6 @@ def cyjsonData():
         return data
     res = db_query()
     return jsonify(res)
-# @app.route('/cyjson')
-# def cyjsonData():
-#     def countriesData(self):
-#         self.cur.execute("SELECT Country_code, Value FROM country_lookup ORDER BY Value DESC")
-#         result = self.cur.fetchall()
-#         # print(result[0])
-#         return result
-#         for row in result:
-#             country_data = []
-#             tempDict = {}
-#             tempDict["id"] = row[0]
-#             tempDict["value"] = int(row[1])
-#             # tempDict[row[0]] = int(row[1])
-#             country_data.append(tempDict)
-#         return jsonify(country_data)
 	
 @app.route('/franklin')
 def franklin():

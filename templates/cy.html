@@ -73,8 +73,6 @@ tr:nth-child(even) {
         polygonSeries.heatRules.push({
             property: "fill",
             target: polygonSeries.mapPolygons.template,
-            // min: am4core.color("#0010ff"),
-            // max: am4core.color("#157d00")
             min: chart.colors.getIndex(17).brighten(1),
             max: chart.colors.getIndex(17).brighten(-.3)
         });
@@ -94,6 +92,8 @@ tr:nth-child(even) {
                 CountriesCounts.push(element)  //  push them to the empty array
             });
         });
+        console.log("CountriesCounts")
+        console.log(CountriesCounts)
 
         // Set heatmap values for each state
         polygonSeries.data = [
@@ -963,6 +963,7 @@ tr:nth-child(even) {
                 "value": 1
             }
         ];
+    console.log("polygonSeries.data")
     console.log(polygonSeries.data)
     
         // Set up heat legend
