@@ -1,6 +1,7 @@
 from flask import Flask, request, url_for, redirect, render_template
 import pymysql
 from bokeh.plotting import figure, output_file, show
+import numpy as np
 
 app = Flask(__name__)
 
@@ -61,7 +62,8 @@ def harish():
         db = Database()
         emps = db.list_employees()
 
-		# prepare some data
+        # ===================================== BOKEH Start here ==================================
+		# prepare some data ******************* LINE GRAPH **********************************
         x = [0.1, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0]
         y0 = [i**2 for i in x]
         y1 = [10**i for i in x]
@@ -87,6 +89,29 @@ def harish():
 
         # show the results
         show(p)
+
+        # prepare some data ******************* BUBBLE GRAPH **********************************
+        N = 4000
+        x = np.random.random(size=N) * 100
+        y = np.random.random(size=N) * 100
+        radii = np.random.random(size=N) * 1.5
+        colors = [
+            "#%02x%02x%02x" % (int(r), int(g), 150) for r, g in zip(50+2*x, 30+2*y)
+        ]
+
+        # output to static HTML file (with CDN resources)
+        output_file("color_scatter.html", title="color_scatter.py example", mode="cdn")
+        TOOLS="crosshair,pan,wheel_zoom,box_zoom,reset,box_select,lasso_select"
+
+        # create a new plot with the tools above, and explicit ranges
+        p = figure(tools=TOOLS, x_range=(0,100), y_range=(0,100))
+
+        # add a circle renderer with vectorized colors and sizes
+        p.circle(x,y, radius=radii, fill_color=colors, fill_alpha=0.6, line_color=None)
+
+        # show the results
+        show(p)
+
         return emps
 	
     res = db_query()
