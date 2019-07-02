@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, redirect, render_template
+from flask import Flask, request, url_for, redirect, render_template, jsonify
 import pymysql
 from bokeh.plotting import figure, output_file, show
 import numpy as np
@@ -19,6 +19,11 @@ class Database:
         result = self.cur.fetchall()
         print(result[0])
         return result
+    def countriesData(self):
+        self.cur.execute("SELECT * FROM country_lookup ORDER BY value DESC")
+        result = self.cur.fetchall()
+        # print(result[0])
+        return result
 		
 @app.route('/')
 def index():
@@ -33,10 +38,19 @@ def index():
 def cy():
     def db_query():
         db = Database()
-        emps = db.list_employees()
-        return emps
+        data = db.countriesData()
+        return data
     res = db_query()
     return render_template('cy.html', result=res, content_type='application/json')
+
+@app.route('/cyjson')
+def cyjsonData():
+    def db_query():
+        db = Database()
+        data = db.countriesData()
+        return data
+    res = db_query()
+    return jsonify(res)
 	
 @app.route('/franklin')
 def franklin():
